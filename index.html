@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKII – SK Investment &amp; Insurance Planning</title>
+  <style>
+    /* ===========================
+       Base Styles
+       =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #002f6c; /* Dark Blue */
+      text-align: center;
+    }
+    p {
+      margin-bottom: 1rem;
+      color: #444;
+    }
+    .hidden {
+      display: none;
+    }
+    input, select {
+      font-family: inherit;
+    }
+    button {
+      font-family: inherit;
+    }
+
+    /* ===========================
+       Navigation Bar
+       =========================== */
+    nav {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background-color: #e0e8f5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    nav .nav-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+    nav li {
+      font-size: 1rem;
+    }
+    nav a {
+      color: #002f6c;
+      font-weight: bold;
+      padding: 8px 12px;
+      transition: background-color 0.3s, color 0.3s;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #ffb400;
+      color: #ffffff;
+    }
+
+    /* ===========================
+       Header & Logo Section
+       =========================== */
+    #header-section {
+      background: linear-gradient(135deg, #004f9e 0%, #ff8c00 100%);
+      position: relative;
+      min-height: 320px;
+      overflow: hidden;
+    }
+    /* Logo at bottom-left corner */
+    #header-section img.logo {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 180px;
+      height: auto;
+      z-index: 2;
+    }
+    /* Central content for header: texts and enquire button */
+    #header-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      text-align: center;
+      z-index: 2;
+    }
+    #header-content .line {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    #header-content .contact-info {
+      margin-top: 12px;
+      font-size: 1rem;
+    }
+    #header-content .button-group {
+      margin-top: 20px;
+    }
+    .enquire-button {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: transform 0.3s ease, box-shadow 0.3s;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .enquire-button svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+      fill: #ffffff;
+    }
+    .enquire-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    /* Rotating finance images as subtle background */
+    .header-images {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .header-images img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+    }
+    .header-images img.active {
+      opacity: 0.25; /* low opacity to blend with gradient */
+      filter: blur(1px);
+    }
+
+    /* ===========================
+       Main Sections Wrapper
+       =========================== */
+    #main-content {
+      /* Contains About, Services, Goal, Testimonials, Stats, Contact */
+    }
+
+    /* ===========================
+       About Us
+       =========================== */
+    #about {
+      background: linear-gradient(135deg, rgba(187,225,255,0.8) 0%, rgba(255,217,179,0.8) 100%);
+      padding: 60px 0;
+    }
+    #about .about-block {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    #about .about-block img {
+      border-radius: 8px;
+      object-fit: cover;
+      width: 180px;
+      height: 180px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin: 0 auto 20px;
+    }
+    #about .about-block p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 1rem;
+      color: #444;
+    }
+
+    /* ===========================
+       Services
+       =========================== */
+    #services {
+      background: linear-gradient(135deg, #e3f2fd 0%, #fff3e0 100%);
+      padding: 80px 0;
+    }
+    #services h2 {
+      color: #002f6c;
+    }
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .service-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .service-card svg {
+      width: 28px;
+      height: 28px;
+      fill: #0066cc;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .service-card h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      color: #002f6c;
+    }
+    .service-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* ===========================
+       Goal-Based Planning (8 cards)
+       =========================== */
+    #goal {
+      background: linear-gradient(135deg, #bbe1ff 0%, #ffd9b3 100%);
+      padding: 80px 0;
+    }
+    #goal h2 {
+      color: #002f6c;
+      margin-bottom: 40px;
+    }
+    #goal .goal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .goal-card {
+      background-color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .goal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .goal-card h3 {
+      font-size: 1.1rem;
+      color: #0066cc;
+      margin-bottom: 8px;
+    }
+    .goal-card p {
+      font-size: 0.9rem;
+      color: #444;
+      margin-bottom: 12px;
+    }
+    .goal-card a {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff6f00 0%, #ff9e00 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .goal-card a:hover {
+      background: linear-gradient(135deg, #e65a00 0%, #ff8c00 100%);
+      transform: translateY(-2px);
+    }
+
+    /* ===========================
+       Testimonials
+       =========================== */
+    #testimonials {
+      background: linear-gradient(135deg, #e3f2fd 0%, #fff3e0 100%);
+      padding: 60px 0;
+      position: relative;
+    }
+    #testimonials h2 {
+      margin-bottom: 40px;
+    }
+    #testimonials .testimonial-container {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      padding: 0 20px;
+    }
+    .testimonial {
+      display: none;
+      font-style: italic;
+      color: #444;
+      font-size: 1.1rem;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .testimonial.active {
+      display: block;
+      opacity: 1;
+    }
+    .testimonial-author {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #002f6c;
+    }
+
+    /* ===========================
+       Achievements / Stats
+       =========================== */
+    #stats {
+      background: linear-gradient(135deg, #bbe1ff 0%, #ffd9b3 100%);
+      padding: 80px 0;
+    }
+    #stats h2 {
+      color: #002f6c;
+      margin-bottom: 40px;
+    }
+    #stats .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+      text-align: center;
+    }
+    .stat-item {
+      flex: 1 1 200px;
+      max-width: 250px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 30px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .stat-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .stat-item .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ffb400; /* Yellow Accent */
+      margin-bottom: 10px;
+    }
+    .stat-item .stat-label {
+      font-size: 1rem;
+      color: #002f6c;
+    }
+
+    /* ===========================
+       Contact
+       =========================== */
+    #contact {
+      background-color: #ffffff;
+      padding: 60px 0;
+    }
+    #contact .contact-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    #contact .contact-info {
+      flex: 1 1 350px;
+      max-width: 400px;
+    }
+    #contact h2 {
+      text-align: left;
+      margin-bottom: 20px;
+      color: #002f6c;
+    }
+    #contact .contact-item {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #444;
+      font-size: 1rem;
+    }
+    #contact .contact-item svg {
+      width: 22px;
+      height: 22px;
+      fill: #002f6c;
+    }
+    #contact .whatsapp-link {
+      display: inline-flex;
+      align-items: center;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      color: #ffffff;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    #contact .whatsapp-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    }
+    #contact .whatsapp-link svg {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      fill: #ffffff;
+    }
+
+    /* ===========================
+       Footer (Disclaimer & Copyright)
+       =========================== */
+    footer {
+      background-color: #002f6c;
+      color: #ffffff;
+      text-align: center;
+      padding: 20px 0;
+      font-size: 0.9rem;
+    }
+    footer p {
+      margin-bottom: 5px;
+    }
+
+    /* ===========================
+       Responsive
+       =========================== */
+    @media (max-width: 768px) {
+      #about, #services, #goal, #testimonials, #stats, #contact {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+      nav .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px 0;
+      }
+      nav ul {
+        flex-direction: column;
+        gap: 12px;
+      }
+      #services .services-grid,
+      #goal .goal-grid {
+        grid-template-columns: 1fr;
+      }
+      #stats .stats-grid {
+        flex-direction: column;
+      }
+      #contact .contact-grid {
+        flex-direction: column;
+      }
+      #header-content {
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%, -50%);
+        padding: 20px;
+      }
+      #header-section img.logo {
+        width: 140px;
+      }
+      #header-section {
+        min-height: 420px;
+      }
+    }
+
+    /* ===========================
+       Calculators Overview Styles
+       =========================== */
+    #calculators-overview {
+      padding: 60px 0;
+      background: linear-gradient(135deg, #004f9e 0%, #ff8c00 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Animated gradient background */
+    #calculators-overview::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(0,0,0,0.1), rgba(255,255,255,0.1));
+      animation: rotateBg 20s linear infinite;
+      z-index: 1;
+    }
+    @keyframes rotateBg {
+      from { transform: rotate(0deg) translate(0, 0); }
+      to { transform: rotate(360deg) translate(0, 0); }
+    }
+    #calculators-overview .container {
+      position: relative;
+      z-index: 2;
+      color: #fff;
+    }
+    #calculators-overview h2 {
+      color: #fff;
+      margin-bottom: 30px;
+    }
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+    .calc-card {
+      background-color: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(6px);
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .calc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+    .calc-card h3 {
+      color: #ffb400;
+      margin-bottom: 12px;
+    }
+    .calc-card p {
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .calc-card a {
+      background: linear-gradient(135deg, #ffb400 0%, #ff8c00 100%);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      transition: background 0.3s, transform 0.3s;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .calc-card a:hover {
+      background: linear-gradient(135deg, #e6a200 0%, #ff6d00 100%);
+      transform: translateY(-3px);
+    }
+
+    /* ===========================
+       Calculator Forms Styles
+       =========================== */
+    #calculator-forms {
+      position: relative;
+    }
+    #calculator-forms .calculator {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(187,225,255,0.2) 0%, rgba(255,217,179,0.2) 100%);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease-out;
+      position: relative;
+    }
+    #calculator-forms .calculator::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));
+      opacity: 0.3;
+      z-index: -1;
+      transition: opacity 0.5s;
+    }
+    #calculator-forms .calculator:hover::before {
+      opacity: 0.4;
+    }
+    .calculator h3 {
+      margin-bottom: 20px;
+      color: #002f6c;
+      text-align: center;
+    }
+    .calculator label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #444;
+    }
+    .calculator input[type="number"],
+    .calculator select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+    .calculator input[type="number"]:focus,
+    .calculator select:focus {
+      border-color: #0066cc;
+      outline: none;
+    }
+    .calculator .section-heading {
+      margin: 20px 0 10px;
+      font-weight: bold;
+      color: #002f6c;
+      text-decoration: underline;
+    }
+    .calculator button {
+      background: linear-gradient(135deg, #0066cc 0%, #004f9e 100%);
+      color: #ffffff;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      display: block;
+      margin: 20px auto 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .calculator button:hover {
+      background: linear-gradient(135deg, #005bb5 0%, #003f7e 100%);
+      transform: translateY(-2px);
+    }
+    .calculator .reset-button {
+      background: #cccccc;
+      margin-top: 10px;
+    }
+    .calculator .reset-button:hover {
+      background: #bbbbbb;
+    }
+    .calculator .result {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: #ff6f00;
+      text-align: center;
+      font-weight: bold;
+      background-color: rgba(255, 249, 230, 0.5);
+      padding: 12px;
+      border-radius: 6px;
+    }
+    .calculator .hidden {
+      display: none;
+    }
+
+    /* ===========================
+       Animations
+       =========================== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-container">
+      <ul>
+        <li><a id="nav-home">Home</a></li>
+        <li><a id="nav-about">About Us</a></li>
+        <li><a id="nav-services">Services</a></li>
+        <li><a id="nav-goal">Goal Planning</a></li>
+        <li><a id="nav-calculators">Calculators</a></li>
+        <li><a id="nav-testimonials">Testimonials</a></li>
+        <li><a id="nav-stats">Achievements</a></li>
+        <li><a id="nav-contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header & Logo Section -->
+  <section id="header-section">
+    <!-- Rotating finance images as subtle background -->
+    <div class="header-images">
+      <img src="images/finance1.jpg" alt="Finance Background 1" class="active" />
+      <img src="images/finance2.jpg" alt="Finance Background 2" />
+      <img src="images/finance3.jpg" alt="Finance Background 3" />
+    </div>
+    <!-- Logo at bottom-left corner -->
+    <img src="images/logo.png" alt="SKII Logo" class="logo" />
+    <!-- Central content for header: texts and enquire button -->
+    <div id="header-content">
+      <div class="line">AMFI Registered Mutual Fund Distributors (MFD)</div>
+      <div class="line">IRDAI Certified Insurance Advisor (CIA)</div>
+      <div class="contact-info">No: 91+ 9082215724 &nbsp;|&nbsp; Email: kunal.zagde02@gmail.com</div>
+      <div class="button-group">
+        <div class="enquire-button" id="enquire-btn">
+          <!-- WhatsApp Icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M380.9 97.1C339-12.8 202.6-23.2 126.5 52.8c-74.3 74.2-63.6 210.3 25.1 264.4l-29.1 106.1c-3.4 12.5 14.4 20.3 20.7 9.1l31.1-59.6c5.1 1 10.3 1.6 15.6 1.6 28.1 0 54.9-9.2 76.9-26.5 66.1-52.6 75.4-152.2 23.1-218.5zm-195.4 291.3l-16.9 32 34.7-13.9c62.2 34.1 139.5 16.2 185.1-43.7 44.5-58.7 35.4-142.7-19.3-195.6-42.1-39.9-103.6-49.6-154.8-23.4-44.1 22.9-70.3 68.6-70.3 118.7 0 39.4 16.4 76.4 44.6 102 2.1 2 4.7 3.1 7.4 3.1a11 11 0 006.2-2.1l24.9-18.5c3.2-2.4 4-6.7 1.9-10.1l-10.2-19c-1.8-3.3-5.6-4.8-8.9-3.4-13.4 5.8-28.9 3.4-40.1-6.6-21.4-19.1-35.1-45-35.1-73.9 0-55.3 44.9-100.2 100.2-100.2 26.5 0 51.5 10.4 69.8 29.3 17 17.5 26.5 40.3 26.5 64.9 0 51.8-29.8 100.4-78.4 124.5-11.8 5.6-24.5 8.5-37.3 8.5-5.2 0-10.3-.3-15.3-.9z"/>
+          </svg>
+          Enquire Now
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Wrapper -->
+  <div id="main-content">
+    <!-- About Us Section -->
+    <section id="about">
+      <div class="container">
+        <h2>About Us</h2>
+        <div class="about-block">
+          <img src="images/sakshi.jpg" alt="Sakshi Zagde" />
+          <p>
+            <strong>Sakshi Zagde</strong> brings over <span style="color: #ffb400;">20+ years</span> of experience across AIFs, stocks, mutual funds, and insurance. As the cornerstone of SKII, her deep market insights and client-centric strategies set the standard for excellence.
+          </p>
+        </div>
+        <div class="about-block">
+          <img src="images/kunal.jpg" alt="Kunal Zagde" />
+          <p>
+            <strong>Kunal Zagde, CFP®</strong> holds NISM Advisor Levels 1 &amp; 2 and has worked with both Indian and foreign clients for over 5 years. His digital-first approach ensures modern, transparent planning solutions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <h2>Our Services</h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <!-- Icon: Mutual Funds -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M3 3h18v2H3V3zm0 4h14v2H3V7zm0 4h18v2H3v-2zm0 4h14v2H3v-2zm0 4h18v2H3v-2z"/>
+            </svg>
+            <div>
+              <h3>Mutual Fund Investments</h3>
+              <p>Help manage your investments across diverse mutual fund schemes.</p>
+            </div>
+          </div>
+          <div class="service-card">
+            <!-- Icon: Insurance -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm0 2.18l6 2v5.6c0 4.27-2.9 8.31-6 9.64-3.1-1.33-6-5.37-6-9.64V6.18l6-2zM11 11h2v5h-2v-5zm0-4h2v2h-2V7z"/>
+            </svg>
+            <div>
+              <h3>Insurance Planning</h3>
+              <p>Provide comprehensive insurance planning to safeguard your family.</p>
+            </div>
+          </div>
+          <div class="service-card">
+            <!-- Icon: Retirement -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M12 2a9.926 9.926 0 00-7.07 2.93A9.926 9.926 0 002 12a9.926 9.926 0 002.93 7.07A9.926 9.926 0 0012 22a9.926 9.926 0 007.07-2.93A9.926 9.926 0 0022 12a9.926 9.926 0 00-2.93-7.07A9.926 9.926 0 0012 2zm0 2a7.934 7.934 0 015.657 2.343A7.934 7.934 0 0119.999 12c0 2.137-.832 4.17-2.343 5.657A7.934 7.934 0 0112 19.999 7.934 7.934 0 016.343 17.657 7.934 7.934 0 013.999 12a7.934 7.934 0 012.343-5.657A7.934 7.934 0 0112 4zm-1 3v5l4 2 .001-2.001L13 12V7h-2z"/>
+            </svg>
+            <div>
+              <h3>Retirement Planning</h3>
+              <p>Plan for a comfortable and stress-free retirement tailored to your needs.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Goal-Based Planning Section -->
+    <section id="goal">
+      <div class="container">
+        <h2>Goal-Based Planning</h2>
+        <div class="goal-grid">
+          <div class="goal-card">
+            <h3>Child Education</h3>
+            <p>Secure their future dreams with a solid plan.</p>
+            <a onclick="showCalculator('calc-education')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Car/Home Planning</h3>
+            <p>Drive away stress—plan for the car or home you love.</p>
+            <a onclick="showCalculator('calc-car')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Retirement</h3>
+            <p>Enjoy golden years without financial worry.</p>
+            <a onclick="showCalculator('calc-retirement')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Child Marriage</h3>
+            <p>Celebrate milestones without financial strain.</p>
+            <a onclick="showCalculator('calc-marriage')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Vacation</h3>
+            <p>Create memories—plan that dream getaway.</p>
+            <a onclick="showCalculator('calc-vacation')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Succession Planning</h3>
+            <p>Preserve your legacy for generations to come.</p>
+            <a onclick="showCalculator('calc-succession')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Wealth Creation</h3>
+            <p>Build a future of abundance and security.</p>
+            <a onclick="showCalculator('calc-wealth')">Calculate Now</a>
+          </div>
+          <div class="goal-card">
+            <h3>Other Goals</h3>
+            <p>Any unique goal? Let’s craft a plan together.</p>
+            <a onclick="showCalculator('calc-others')">Calculate Now</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+      <div class="container">
+        <h2>Testimonials</h2>
+        <div class="testimonial-container">
+          <div class="testimonial active" id="testimonial-0">
+            “SKII’s goal-based strategy helped me plan my daughter’s college fund seamlessly.”
+            <div class="testimonial-author">— Mitesh Shelke</div>
+          </div>
+          <div class="testimonial" id="testimonial-1">
+            “Their digital approach made investing straightforward and risk-managed—I’m very happy.”
+            <div class="testimonial-author">— Mayuresh Shetye</div>
+          </div>
+          <div class="testimonial" id="testimonial-2">
+            “From retirement advice to insurance coverage, SKII covered it all—highly recommended.”
+            <div class="testimonial-author">— Darshan Poojari</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements / Stats Section -->
+    <section id="stats">
+      <div class="container">
+        <h2>Our Achievements</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">7+</div>
+            <div class="stat-label">Years of Service</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">750+</div>
+            <div class="stat-label">Lakhs AUM</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100+</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-grid">
+          <div class="contact-info">
+            <div class="contact-item">
+              <!-- Phone Icon (SVG) -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.06 15.06 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27 11.36 11.36 0 003.57.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.75a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.27 1.11l-2.43 2.43z" />
+              </svg>
+              <span>+91 9082215724</span>
+            </div>
+            <div class="contact-item">
+              <!-- Email Icon (SVG) -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 2v.01L12 13 4 6.01V6h16zM4 18V8l8 5 8-5v10H4z" />
+              </svg>
+              <span>kunal.zagde02@gmail.com</span>
+            </div>
+            <!-- WhatsApp Link -->
+            <a
+              class="whatsapp-link"
+              href="https://wa.me/9082215724?text=book%20my%20free%20consultation"
+              target="_blank"
+              rel="noopener"
+            >
+              <!-- WhatsApp Icon (SVG) -->
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                <path
+                  d="M380.9 97.1C339-12.8 202.6-23.2 126.5 52.8c-74.3 74.2-63.6 210.3 25.1 264.4l-29.1 106.1c-3.4 12.5 14.4 20.3 20.7 9.1l31.1-59.6c5.1 1 10.3 1.6 15.6 1.6 28.1 0 54.9-9.2 76.9-26.5 66.1-52.6 75.4-152.2 23.1-218.5zm-195.4 291.3l-16.9 32 34.7-13.9c62.2 34.1 139.5 16.2 185.1-43.7 44.5-58.7 35.4-142.7-19.3-195.6-42.1-39.9-103.6-49.6-154.8-23.4-44.1 22.9-70.3 68.6-70.3 118.7 0 39.4 16.4 76.4 44.6 102 2.1 2 4.7 3.1 7.4 3.1a11 11 0 006.2-2.1l24.9-18.5c3.2-2.4 4-6.7 1.9-10.1l-10.2-19c-1.8-3.3-5.6-4.8-8.9-3.4-13.4 5.8-28.9 3.4-40.1-6.6-21.4-19.1-35.1-45-35.1-73.9 0-55.3 44.9-100.2 100.2-100.2 26.5 0 51.5 10.4 69.8 29.3 17 17.5 26.5 40.3 26.5 64.9 0 51.8-29.8 100.4-78.4 124.5-11.8 5.6-24.5 8.5-37.3 8.5-5.2 0-10.3-.3-15.3-.9z"
+                />
+              </svg>
+              WhatsApp Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div> <!-- End main-content -->
+
+  <!-- Calculators Overview Section (Hidden by default) -->
+  <section id="calculators-overview" class="hidden">
+    <div class="container">
+      <h2>Our Calculators</h2>
+      <div class="calc-grid">
+        <div class="calc-card">
+          <h3>Retirement Planning</h3>
+          <p>Find out how much you need to retire comfortably.</p>
+          <a onclick="showCalculator('calc-retirement')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Child’s Marriage</h3>
+          <p>Plan funds for your child’s special day.</p>
+          <a onclick="showCalculator('calc-marriage')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Vacation Planning</h3>
+          <p>Save for that dream getaway.</p>
+          <a onclick="showCalculator('calc-vacation')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Child’s Education</h3>
+          <p>Ensure your child’s education is secured.</p>
+          <a onclick="showCalculator('calc-education')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Car/Home Planning</h3>
+          <p>Budget for your next big purchase.</p>
+          <a onclick="showCalculator('calc-car')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Succession Planning</h3>
+          <p>Preserve and pass on your wealth.</p>
+          <a onclick="showCalculator('calc-succession')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Wealth Creation</h3>
+          <p>Grow your assets systematically.</p>
+          <a onclick="showCalculator('calc-wealth')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>SIP Calculator</h3>
+          <p>Know how much you’ll accumulate with monthly SIPs.</p>
+          <a onclick="showCalculator('calc-sip')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>Quick Tools</h3>
+          <p>Present Value &amp; Future Value calculations.</p>
+          <a onclick="showCalculator('calc-quick')">Calculate Now</a>
+        </div>
+        <div class="calc-card">
+          <h3>SWP Calculator</h3>
+          <p>Plan systematic withdrawals post-investment.</p>
+          <a onclick="showCalculator('calc-swp')">Calculate Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator Forms Section (Hidden by default) -->
+  <section id="calculator-forms" class="hidden">
+    <!-- Retirement Calculator -->
+    <div id="calc-retirement" class="calculator hidden">
+      <h3>Retirement Planning Calculator</h3>
+
+      <!-- Personal Profile -->
+      <label for="retire-age">Present Age:</label>
+      <input type="number" id="retire-age" placeholder="e.g., 30" min="0" />
+      <label for="retire-goal-age">Desired Retirement Age:</label>
+      <input type="number" id="retire-goal-age" placeholder="e.g., 60" min="0" />
+
+      <!-- Expenses & Assumptions -->
+      <label for="retire-monthly-exp">Current Monthly Expenses (₹):</label>
+      <input type="number" id="retire-monthly-exp" placeholder="e.g., 30000" min="0" />
+
+      <label for="retire-inflation">Expected Annual Inflation (%):</label>
+      <input type="number" id="retire-inflation" value="6" min="0" />
+
+      <label for="retire-return">Expected Annual Return (%):</label>
+      <input type="number" id="retire-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="retire-current-funds">Current Funds (₹):</label>
+      <input type="number" id="retire-current-funds" placeholder="e.g., 200000" min="0" />
+
+      <label for="retire-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="retire-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="retire-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="retire-sip-inc" value="5" min="0" />
+
+      <!-- Retirement Duration Assumptions -->
+      <div class="section-heading">Assumptions</div>
+      <label for="retire-life-exp">Expected Life Expectancy (years):</label>
+      <input type="number" id="retire-life-exp" value="85" min="60" />
+
+      <label for="retire-post-inflation">Post-Retirement Inflation (%):</label>
+      <input type="number" id="retire-post-inflation" value="6" min="0" />
+
+      <label for="retire-post-return">Expected Post-Retirement Return (%):</label>
+      <input type="number" id="retire-post-return" value="8" min="0" />
+
+      <button onclick="calculateRetirement()">Calculate</button>
+      <button class="reset-button" onclick="resetRetirement()">Reset</button>
+      <div class="result" id="retire-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Child’s Marriage Calculator -->
+    <div id="calc-marriage" class="calculator hidden">
+      <h3>Child’s Marriage Calculator</h3>
+      <label for="marriage-years">Years to Maturity:</label>
+      <input type="number" id="marriage-years" placeholder="e.g., 15" min="0" />
+      <label for="marriage-cost-today">Current Marriage Cost (₹):</label>
+      <input type="number" id="marriage-cost-today" placeholder="e.g., 300000" min="0" />
+
+      <label for="marriage-inflation">Expected Annual Inflation (%):</label>
+      <input type="number" id="marriage-inflation" value="7" min="0" />
+
+      <label for="marriage-return">Expected Annual Return (%):</label>
+      <input type="number" id="marriage-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="marriage-current-funds">Current Funds (₹):</label>
+      <input type="number" id="marriage-current-funds" placeholder="e.g., 100000" min="0" />
+
+      <label for="marriage-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="marriage-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="marriage-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="marriage-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateMarriage()">Calculate</button>
+      <button class="reset-button" onclick="resetMarriage()">Reset</button>
+      <div class="result" id="marriage-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Vacation Planning Calculator -->
+    <div id="calc-vacation" class="calculator hidden">
+      <h3>Vacation Planning Calculator</h3>
+      <label for="vacation-years">Years to Vacation:</label>
+      <input type="number" id="vacation-years" placeholder="e.g., 3" min="0" />
+      <label for="vacation-cost-today">Current Vacation Cost (₹):</label>
+      <input type="number" id="vacation-cost-today" placeholder="e.g., 150000" min="0" />
+
+      <label for="vacation-inflation">Expected Annual Inflation (%):</label>
+      <input type="number" id="vacation-inflation" value="6" min="0" />
+
+      <label for="vacation-return">Expected Annual Return (%):</label>
+      <input type="number" id="vacation-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="vacation-current-funds">Current Funds (₹):</label>
+      <input type="number" id="vacation-current-funds" placeholder="e.g., 50000" min="0" />
+
+      <label for="vacation-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="vacation-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="vacation-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="vacation-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateVacation()">Calculate</button>
+      <button class="reset-button" onclick="resetVacation()">Reset</button>
+      <div class="result" id="vacation-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Child’s Education Calculator -->
+    <div id="calc-education" class="calculator hidden">
+      <h3>Child’s Education Calculator</h3>
+      <label for="edu-current-cost">Current Education Cost (₹):</label>
+      <input type="number" id="edu-current-cost" placeholder="e.g., 200000" min="0" />
+      <label for="edu-years">Years Until Education:</label>
+      <input type="number" id="edu-years" placeholder="e.g., 10" min="0" />
+
+      <label for="edu-inflation">Expected Annual Inflation (%):</label>
+      <input type="number" id="edu-inflation" value="6" min="0" />
+
+      <label for="edu-return">Expected Annual Return (%):</label>
+      <input type="number" id="edu-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="edu-current-funds">Current Funds (₹):</label>
+      <input type="number" id="edu-current-funds" placeholder="e.g., 100000" min="0" />
+
+      <label for="edu-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="edu-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="edu-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="edu-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateEducation()">Calculate</button>
+      <button class="reset-button" onclick="resetEducation()">Reset</button>
+      <div class="result" id="edu-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Car/Home Planning Calculator -->
+    <div id="calc-car" class="calculator hidden">
+      <h3>Car/Home Planning Calculator</h3>
+      <label for="car-current-cost">Current Cost (₹):</label>
+      <input type="number" id="car-current-cost" placeholder="e.g., 1000000" min="0" />
+
+      <label for="car-years">Years Until Purchase:</label>
+      <input type="number" id="car-years" placeholder="e.g., 5" min="0" />
+
+      <label for="car-inflation">Expected Annual Inflation (%):</label>
+      <input type="number" id="car-inflation" value="8" min="0" />
+
+      <label for="car-return">Expected Annual Return (%):</label>
+      <input type="number" id="car-return" value="12" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="car-current-funds">Current Funds (₹):</label>
+      <input type="number" id="car-current-funds" placeholder="e.g., 50000" min="0" />
+
+      <label for="car-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="car-funds-return" value="14" min="0" />
+
+      <!-- Down Payment -->
+      <div class="section-heading">Down Payment</div>
+      <label for="car-dp-percent">Down Payment (% of Future Cost):</label>
+      <input type="number" id="car-dp-percent" value="20" min="0" max="100" />
+
+      <!-- Loan Option -->
+      <div class="section-heading">Loan Option</div>
+      <label for="car-loan-choice">Loan Needed?</label>
+      <select id="car-loan-choice" onchange="toggleCarLoanFields()">
+        <option value="yes">Yes</option>
+        <option value="no">No (100% Down Payment)</option>
+      </select>
+      <div id="car-loan-fields">
+        <label for="car-loan-tenure">Loan Tenure (years):</label>
+        <input type="number" id="car-loan-tenure" placeholder="e.g., 5" min="0" />
+        <label for="car-loan-rate">Loan Interest Rate (% yearly):</label>
+        <input type="number" id="car-loan-rate" placeholder="e.g., 9" min="0" />
+      </div>
+
+      <!-- SIP Preferences for DP gap -->
+      <div class="section-heading">SIP for Down Payment Gap</div>
+      <label for="car-dp-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="car-dp-sip-inc" value="0" min="0" />
+
+      <!-- SIP Preferences for Remaining Gap -->
+      <div class="section-heading">SIP for Remaining Gap (if not taking loan)</div>
+      <label for="car-rem-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="car-rem-sip-inc" value="0" min="0" />
+
+      <button onclick="calculateCar()">Calculate</button>
+      <button class="reset-button" onclick="resetCar()">Reset</button>
+      <div class="result" id="car-result" style="text-align:left;"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Succession Planning Calculator -->
+    <div id="calc-succession" class="calculator hidden">
+      <h3>Succession Planning Calculator</h3>
+      <label for="succession-amt">Succession Amount Needed (₹):</label>
+      <input type="number" id="succession-amt" placeholder="e.g., 1000000" min="0" />
+
+      <label for="succession-years">Years to Maturity:</label>
+      <input type="number" id="succession-years" placeholder="e.g., 10" min="0" />
+
+      <label for="succession-return">Expected Annual Return (%):</label>
+      <input type="number" id="succession-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="succession-current-funds">Current Funds (₹):</label>
+      <input type="number" id="succession-current-funds" placeholder="e.g., 200000" min="0" />
+
+      <label for="succession-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="succession-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="succession-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="succession-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateSuccession()">Calculate</button>
+      <button class="reset-button" onclick="resetSuccession()">Reset</button>
+      <div class="result" id="succession-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Wealth Creation Calculator -->
+    <div id="calc-wealth" class="calculator hidden">
+      <h3>Wealth Creation Calculator</h3>
+      <label for="wealth-amt">Amount Desired (₹):</label>
+      <input type="number" id="wealth-amt" placeholder="e.g., 500000" min="0" />
+
+      <label for="wealth-years">Years to Achieve:</label>
+      <input type="number" id="wealth-years" placeholder="e.g., 8" min="0" />
+
+      <label for="wealth-return">Expected Annual Return (%):</label>
+      <input type="number" id="wealth-return" value="8" min="0" />
+
+      <!-- Earmarked Investments -->
+      <div class="section-heading">Earmarked Investments</div>
+      <label for="wealth-current-funds">Current Funds (₹):</label>
+      <input type="number" id="wealth-current-funds" placeholder="e.g., 100000" min="0" />
+
+      <label for="wealth-funds-return">Expected Return on Current Funds (%):</label>
+      <input type="number" id="wealth-funds-return" value="8" min="0" />
+
+      <!-- SIP Preferences -->
+      <div class="section-heading">SIP Preferences</div>
+      <label for="wealth-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="wealth-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateWealth()">Calculate</button>
+      <button class="reset-button" onclick="resetWealth()">Reset</button>
+      <div class="result" id="wealth-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- SIP Calculator -->
+    <div id="calc-sip" class="calculator hidden">
+      <h3>SIP Calculator</h3>
+      <label for="sip-monthly">Monthly SIP Amount (₹):</label>
+      <input type="number" id="sip-monthly" placeholder="e.g., 5000" min="0" />
+
+      <label for="sip-period">Investment Period (years):</label>
+      <input type="number" id="sip-period" placeholder="e.g., 10" min="0" />
+
+      <label for="sip-return">Expected Annual Return (%):</label>
+      <input type="number" id="sip-return" value="8" min="0" />
+
+      <label for="sip-sip-inc">Yearly Increase in SIP (%):</label>
+      <input type="number" id="sip-sip-inc" value="5" min="0" />
+
+      <button onclick="calculateSIP()">Calculate</button>
+      <button class="reset-button" onclick="resetSIP()">Reset</button>
+      <div class="result" id="sip-result"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Quick Tools Calculator -->
+    <div id="calc-quick" class="calculator hidden">
+      <h3>Quick Tools</h3>
+      <div style="margin-bottom: 20px;">
+        <strong>Future Value:</strong><br />
+        <label for="fv-present">Present Value (₹):</label>
+        <input type="number" id="fv-present" placeholder="e.g., 100000" min="0" />
+
+        <label for="fv-years">Years:</label>
+        <input type="number" id="fv-years" placeholder="e.g., 5" min="0" />
+
+        <label for="fv-rate">Rate (% yearly):</label>
+        <input type="number" id="fv-rate" value="8" min="0" />
+
+        <button onclick="calculateFV()">Compute FV</button>
+        <div class="result" id="fv-result"></div>
+      </div>
+      <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;" />
+      <div>
+        <strong>Present Value:</strong><br />
+        <label for="pv-future">Future Value (₹):</label>
+        <input type="number" id="pv-future" placeholder="e.g., 200000" min="0" />
+
+        <label for="pv-years">Years:</label>
+        <input type="number" id="pv-years" placeholder="e.g., 5" min="0" />
+
+        <label for="pv-rate">Rate (% yearly):</label>
+        <input type="number" id="pv-rate" value="8" min="0" />
+
+        <button onclick="calculatePV()">Compute PV</button>
+        <div class="result" id="pv-result"></div>
+      </div>
+      <button class="reset-button" onclick="resetQuick()">Reset</button>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- SWP Calculator -->
+    <div id="calc-swp" class="calculator hidden">
+      <h3>SWP Calculator</h3>
+      <label for="swp-investment">Investment Today (₹):</label>
+      <input type="number" id="swp-investment" placeholder="e.g., 1000000" min="0" />
+
+      <label for="swp-use-inflation">
+        <input type="checkbox" id="swp-use-inflation" /> Adjust Withdrawals for Inflation
+      </label>
+
+      <label for="swp-inflation">Inflation Rate (% yearly):</label>
+      <input type="number" id="swp-inflation" value="6" min="0" disabled />
+
+      <label for="swp-return">Expected Annual Return (% yearly):</label>
+      <input type="number" id="swp-return" value="12" min="0" />
+
+      <label for="swp-withdrawal-rate">Withdrawal Rate (% of corpus per year):</label>
+      <input type="number" id="swp-withdrawal-rate" value="6" min="0" />
+
+      <label for="swp-years">Withdrawal Years:</label>
+      <input type="number" id="swp-years" placeholder="e.g., 25" min="0" />
+
+      <button onclick="calculateSWP()">Calculate</button>
+      <button class="reset-button" onclick="resetSWP()">Reset</button>
+      <div class="result" id="swp-result"></div>
+      <div id="swp-table-container" style="margin-top:20px;"></div>
+      <div style="text-align:center; margin-top:16px;">
+        <a onclick="showCalculatorsOverview()" style="color:#0066cc; cursor:pointer;">Back to Calculators</a>
+      </div>
+    </div>
+
+    <!-- Placeholder for "Other Goals" if needed -->
+    <div id="calc-others" class="calculator hidden">
+      <h3>Other Goals Calculator</h3>
+      <p style="text-align:center; color:#777;">Please choose a specific goal from the Calculator Overview or Goal Planning section.</p>
+      <button class="reset-button" onclick="showCalculatorsOverview()">Back to Calculators</button>
+    </div>
+  </section>
+
+  <!-- Footer: Disclaimer & Copyright -->
+  <footer>
+    <p>Disclaimer: SKII is a Mutual Fund Distributor &amp; Insurance Planner</p>
+    <p>© 2025 SK Investment &amp; Insurance Planning – All rights reserved.</p>
+  </footer>
+
+  <!-- JavaScript for Navigation, Animations & Calculations -->
+  <script>
+    /* ===========================
+       Helper Functions: Show/Hide Sections
+       =========================== */
+    function showMainContent() {
+      document.getElementById("main-content").classList.remove("hidden");
+      document.getElementById("calculators-overview").classList.add("hidden");
+      document.getElementById("calculator-forms").classList.add("hidden");
+      window.scrollTo(0, 0);
+    }
+    function showCalculatorsOverview() {
+      document.getElementById("main-content").classList.add("hidden");
+      document.getElementById("calculators-overview").classList.remove("hidden");
+      document.getElementById("calculator-forms").classList.add("hidden");
+      window.scrollTo(0, 0);
+    }
+    function showCalculator(calcId) {
+      document.getElementById("main-content").classList.add("hidden");
+      document.getElementById("calculators-overview").classList.add("hidden");
+      document.getElementById("calculator-forms").classList.remove("hidden");
+      const forms = document.querySelectorAll("#calculator-forms .calculator");
+      forms.forEach(form => form.classList.add("hidden"));
+      document.getElementById(calcId).classList.remove("hidden");
+      document.getElementById(calcId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ===========================
+       Navigation Button Listeners
+       =========================== */
+    document.getElementById("nav-home").addEventListener("click", showMainContent);
+    document.getElementById("nav-about").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("about").scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById("nav-services").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("services").scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById("nav-goal").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("goal").scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById("nav-calculators").addEventListener("click", showCalculatorsOverview);
+    document.getElementById("nav-testimonials").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("testimonials").scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById("nav-stats").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("stats").scrollIntoView({ behavior: 'smooth' });
+    });
+    document.getElementById("nav-contact").addEventListener("click", () => {
+      showMainContent();
+      document.getElementById("contact").scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* ===========================
+       Enquire Now Button – WhatsApp Redirect
+       =========================== */
+    document.getElementById("enquire-btn").addEventListener("click", () => {
+      window.open("https://wa.me/9082215724?text=book%20my%20free%20consultation", "_blank");
+    });
+
+    /* ===========================
+       Header Background Image Rotation
+       =========================== */
+    document.addEventListener("DOMContentLoaded", function () {
+      const headerImgs = document.querySelectorAll(".header-images img");
+      let headerIndex = 0;
+      setInterval(() => {
+        headerImgs.forEach((img, idx) => {
+          img.classList.toggle("active", idx === headerIndex);
+        });
+        headerIndex = (headerIndex + 1) % headerImgs.length;
+      }, 4000);
+    });
+
+    /* ===========================
+       Testimonials Rotation (every 5s)
+       =========================== */
+    document.addEventListener("DOMContentLoaded", function () {
+      const testimonials = document.querySelectorAll(".testimonial");
+      let currentIndex = 0;
+      function showTestimonial(index) {
+        testimonials.forEach((item, i) => {
+          item.classList.toggle("active", i === index);
+        });
+      }
+      function nextTestimonial() {
+        currentIndex = (currentIndex + 1) % testimonials.length;
+        showTestimonial(currentIndex);
+      }
+      setInterval(nextTestimonial, 5000);
+    });
+
+    /* ===========================
+       Financial Calculation Utilities
+       =========================== */
+    function futureValue(pv, rate, years) {
+      const r = rate / 100;
+      return pv * Math.pow(1 + r, years);
+    }
+    function presentValue(fv, rate, years) {
+      const r = rate / 100;
+      return fv / Math.pow(1 + r, years);
+    }
+
+    /* ===========================
+       Reset Functions
+       =========================== */
+    function resetRetirement() {
+      const fields = ["retire-age","retire-goal-age","retire-monthly-exp","retire-inflation","retire-return","retire-current-funds","retire-funds-return","retire-sip-inc","retire-life-exp","retire-post-inflation","retire-post-return"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("retire-result").innerHTML = "";
+    }
+    function resetMarriage() {
+      const fields = ["marriage-years","marriage-cost-today","marriage-inflation","marriage-return","marriage-current-funds","marriage-funds-return","marriage-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("marriage-result").innerHTML = "";
+    }
+    function resetVacation() {
+      const fields = ["vacation-years","vacation-cost-today","vacation-inflation","vacation-return","vacation-current-funds","vacation-funds-return","vacation-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("vacation-result").innerHTML = "";
+    }
+    function resetEducation() {
+      const fields = ["edu-current-cost","edu-years","edu-inflation","edu-return","edu-current-funds","edu-funds-return","edu-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("edu-result").innerHTML = "";
+    }
+    function resetCar() {
+      const fields = ["car-current-cost","car-years","car-inflation","car-return","car-current-funds","car-funds-return","car-dp-percent","car-loan-choice","car-loan-tenure","car-loan-rate","car-dp-sip-inc","car-rem-sip-inc"];
+      fields.forEach(id => {
+        if(document.getElementById(id).tagName === "SELECT") {
+          document.getElementById(id).value = "yes";
+          toggleCarLoanFields();
+        } else {
+          document.getElementById(id).value = "";
+        }
+      });
+      document.getElementById("car-result").innerHTML = "";
+    }
+    function resetSuccession() {
+      const fields = ["succession-amt","succession-years","succession-return","succession-current-funds","succession-funds-return","succession-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("succession-result").innerHTML = "";
+    }
+    function resetWealth() {
+      const fields = ["wealth-amt","wealth-years","wealth-return","wealth-current-funds","wealth-funds-return","wealth-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("wealth-result").innerHTML = "";
+    }
+    function resetSIP() {
+      const fields = ["sip-monthly","sip-period","sip-return","sip-sip-inc"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("sip-result").innerHTML = "";
+    }
+    function resetQuick() {
+      const fields = ["fv-present","fv-years","fv-rate","pv-future","pv-years","pv-rate"];
+      fields.forEach(id => document.getElementById(id).value = "");
+      document.getElementById("fv-result").innerHTML = "";
+      document.getElementById("pv-result").innerHTML = "";
+    }
+    function resetSWP() {
+      const fields = ["swp-investment","swp-use-inflation","swp-inflation","swp-return","swp-withdrawal-rate","swp-years"];
+      document.getElementById("swp-use-inflation").checked = false;
+      document.getElementById("swp-inflation").disabled = true;
+      fields.forEach(id => {
+        if(id !== "swp-use-inflation" && id !== "swp-inflation") {
+          document.getElementById(id).value = "";
+        }
+      });
+      document.getElementById("swp-result").innerHTML = "";
+      document.getElementById("swp-table-container").innerHTML = "";
+    }
+
+    /* ===========================
+       Toggle Car Loan Fields
+       =========================== */
+    function toggleCarLoanFields() {
+      const choice = document.getElementById("car-loan-choice").value;
+      const fields = document.getElementById("car-loan-fields");
+      if (choice === "yes") fields.classList.remove("hidden");
+      else fields.classList.add("hidden");
+    }
+
+    /* Initialize Toggle for Car Loan Fields */
+    document.addEventListener("DOMContentLoaded", () => {
+      toggleCarLoanFields();
+    });
+
+    /* ===========================
+       1. Retirement Planning
+       =========================== */
+    function calculateRetirement() {
+      const age = parseFloat(document.getElementById("retire-age").value) || 0;
+      const goalAge = parseFloat(document.getElementById("retire-goal-age").value) || 0;
+      const currentExp = parseFloat(document.getElementById("retire-monthly-exp").value) || 0;
+      const inflation = parseFloat(document.getElementById("retire-inflation").value) || 0;
+      const expReturn = parseFloat(document.getElementById("retire-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("retire-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("retire-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("retire-sip-inc").value) || 0;
+      const lifeExp = parseFloat(document.getElementById("retire-life-exp").value) || 85;
+      const postInflation = parseFloat(document.getElementById("retire-post-inflation").value) || inflation;
+      const postReturn = parseFloat(document.getElementById("retire-post-return").value) || expReturn;
+
+      const yearsToRetire = Math.max(0, goalAge - age);
+      const retireDuration = Math.max(0, lifeExp - goalAge);
+
+      // 1) Future Value of monthly expenses at retirement:
+      const fvMonthlyExp = currentExp * Math.pow(1 + inflation/100, yearsToRetire);
+
+      // 2) Compute required corpus at retirement (PV of annuity of monthly expenses):
+      const realRate = (1 + postReturn/100)/(1 + postInflation/100) - 1;
+      const realMonthly = realRate / 12;
+      const monthsRetire = retireDuration * 12;
+      let corpusAtRetire = 0;
+      if (realMonthly > 0 && monthsRetire > 0) {
+        corpusAtRetire = fvMonthlyExp * ((1 - Math.pow(1 + realMonthly, -monthsRetire)) / realMonthly);
+      } else {
+        corpusAtRetire = fvMonthlyExp * monthsRetire;
+      }
+
+      // 3) FV of current funds to retirement:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, yearsToRetire);
+
+      // 4) Shortfall:
+      const shortfall = Math.max(0, corpusAtRetire - fvCurrentFunds);
+
+      // 5) SIP with step-up (12-month blocks):
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < yearsToRetire; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (yearsToRetire - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 6) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, yearsToRetire);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Projected Monthly Expense at Retirement:</strong> ₹ ${fvMonthlyExp.toFixed(2)}</p>
+        <p><strong>Retirement Corpus Needed:</strong> ₹ ${corpusAtRetire.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("retire-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       2. Child’s Marriage
+       =========================== */
+    function calculateMarriage() {
+      const years = parseFloat(document.getElementById("marriage-years").value) || 0;
+      const costToday = parseFloat(document.getElementById("marriage-cost-today").value) || 0;
+      const inflation = parseFloat(document.getElementById("marriage-inflation").value) || 0;
+      const expReturn = parseFloat(document.getElementById("marriage-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("marriage-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("marriage-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("marriage-sip-inc").value) || 0;
+
+      // 1) Future cost:
+      const fvCost = futureValue(costToday, inflation, years);
+
+      // 2) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 3) Shortfall at goal:
+      const shortfall = Math.max(0, fvCost - fvCurrentFunds);
+
+      // 4) SIP step-up (12-month blocks):
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 5) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, years);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Future Marriage Cost:</strong> ₹ ${fvCost.toFixed(2)}</p>
+        <p><strong>Shortfall After Current Funds:</strong> ₹ ${shortfall.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("marriage-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       3. Vacation Planning
+       =========================== */
+    function calculateVacation() {
+      const years = parseFloat(document.getElementById("vacation-years").value) || 0;
+      const costToday = parseFloat(document.getElementById("vacation-cost-today").value) || 0;
+      const inflation = parseFloat(document.getElementById("vacation-inflation").value) || 0;
+      const expReturn = parseFloat(document.getElementById("vacation-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("vacation-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("vacation-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("vacation-sip-inc").value) || 0;
+
+      // 1) Future cost:
+      const fvCost = futureValue(costToday, inflation, years);
+
+      // 2) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 3) Shortfall:
+      const shortfall = Math.max(0, fvCost - fvCurrentFunds);
+
+      // 4) SIP step-up:
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 5) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, years);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Future Vacation Cost:</strong> ₹ ${fvCost.toFixed(2)}</p>
+        <p><strong>Shortfall After Current Funds:</strong> ₹ ${shortfall.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("vacation-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       4. Child’s Education
+       =========================== */
+    function calculateEducation() {
+      const costToday = parseFloat(document.getElementById("edu-current-cost").value) || 0;
+      const years = parseFloat(document.getElementById("edu-years").value) || 0;
+      const inflation = parseFloat(document.getElementById("edu-inflation").value) || 0;
+      const expReturn = parseFloat(document.getElementById("edu-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("edu-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("edu-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("edu-sip-inc").value) || 0;
+
+      // 1) Future cost:
+      const fvCost = futureValue(costToday, inflation, years);
+
+      // 2) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 3) Shortfall:
+      const shortfall = Math.max(0, fvCost - fvCurrentFunds);
+
+      // 4) SIP step-up:
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 5) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, years);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Future Education Cost:</strong> ₹ ${fvCost.toFixed(2)}</p>
+        <p><strong>Shortfall After Current Funds:</strong> ₹ ${shortfall.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("edu-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       5. Car/Home Planning
+       =========================== */
+    function calculateCar() {
+      const costToday = parseFloat(document.getElementById("car-current-cost").value) || 0;
+      const years = parseFloat(document.getElementById("car-years").value) || 0;
+      const inflation = parseFloat(document.getElementById("car-inflation").value) || 0;
+      const expReturn = parseFloat(document.getElementById("car-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("car-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("car-funds-return").value) || 0;
+      const dpPercent = parseFloat(document.getElementById("car-dp-percent").value) || 0;
+      const loanChoice = document.getElementById("car-loan-choice").value;
+      const loanTenure = parseFloat(document.getElementById("car-loan-tenure").value) || 0;
+      const loanRate = parseFloat(document.getElementById("car-loan-rate").value) || 0;
+      const dpSipInc = parseFloat(document.getElementById("car-dp-sip-inc").value) || 0;
+      const remSipInc = parseFloat(document.getElementById("car-rem-sip-inc").value) || 0;
+
+      // 1) Future cost:
+      const fvCost = futureValue(costToday, inflation, years);
+
+      // 2) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 3) Future Down Payment amount:
+      const dpAmount = fvCost * (dpPercent / 100);
+
+      // 4) Gap for Down Payment:
+      const gapDP = Math.max(0, dpAmount - fvCurrentFunds);
+
+      // 5) SIP or Lumpsum for Down Payment Gap:
+      let dpSIP = 0, dpLumpsum = 0;
+      if (gapDP > 0) {
+        // SIP block logic for gapDP over 'years' with step-up dpSipInc
+        const rMonthly = expReturn / 100 / 12;
+        let sumOfFVs_DP = 0;
+        for (let yr = 0; yr < years; yr++) {
+          const stepped = Math.pow(1 + dpSipInc/100, yr);
+          const monthsPayments = 12;
+          const monthsRemaining = (years - yr - 1) * 12;
+          const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+          sumOfFVs_DP += blockFV;
+        }
+        dpSIP = sumOfFVs_DP > 0 ? gapDP / sumOfFVs_DP : 0;
+        dpLumpsum = presentValue(gapDP, expReturn, years);
+      }
+
+      // 6) Remaining Cost after DP & Current Funds:
+      const remaining = Math.max(0, fvCost - fvCurrentFunds - dpAmount);
+
+      // 7) Loan EMI if needed:
+      let emi = 0;
+      if (loanChoice === "yes" && remaining > 0) {
+        const monthlyRate = loanRate / 100 / 12;
+        const months = loanTenure * 12;
+        if (monthlyRate > 0 && months > 0) {
+          emi = (remaining * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+        } else {
+          emi = remaining / months;
+        }
+      }
+
+      // 8) SIP or Lumpsum for Remaining if no loan:
+      let remSIP = 0, remLumpsum = 0;
+      if (loanChoice === "no" && remaining > 0) {
+        const rMonthly = expReturn / 100 / 12;
+        let sumOfFVs_REM = 0;
+        for (let yr = 0; yr < years; yr++) {
+          const stepped = Math.pow(1 + remSipInc/100, yr);
+          const monthsPayments = 12;
+          const monthsRemaining = (years - yr - 1) * 12;
+          const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+          sumOfFVs_REM += blockFV;
+        }
+        remSIP = sumOfFVs_REM > 0 ? remaining / sumOfFVs_REM : 0;
+        remLumpsum = presentValue(remaining, expReturn, years);
+      }
+
+      // Display answers:
+      let resultHTML = `
+        <p><strong>Future Cost:</strong> ₹ ${fvCost.toFixed(2)}</p>
+        <p><strong>Current Funds (FV in ${years} yrs):</strong> ₹ ${fvCurrentFunds.toFixed(2)}</p>
+        <p><strong>Future Down Payment (@ ${dpPercent}%):</strong> ₹ ${dpAmount.toFixed(2)}</p>
+      `;
+
+      if (gapDP > 0) {
+        resultHTML += `
+          <p><strong>Gap for Down Payment:</strong> ₹ ${gapDP.toFixed(2)}</p>
+          <p><strong>SIP for DP Gap (Year 1):</strong> ₹ ${dpSIP.toFixed(2)}</p>
+          <p><strong>Lumpsum for DP Gap Today:</strong> ₹ ${dpLumpsum.toFixed(2)}</p>
+        `;
+      } else {
+        resultHTML += `<p><strong>No gap for Down Payment—current funds cover it.</strong></p>`;
+      }
+
+      resultHTML += `<hr style="margin:12px 0;" />`;
+
+      if (remaining > 0) {
+        if (loanChoice === "yes") {
+          resultHTML += `
+            <p><strong>Remaining Amount (After DP & Funds):</strong> ₹ ${remaining.toFixed(2)}</p>
+            <p><strong>EMI for Loan (@ ${loanRate}% for ${loanTenure} yrs):</strong> ₹ ${emi.toFixed(2)}</p>
+          `;
+        } else {
+          resultHTML += `
+            <p><strong>Remaining Amount (After DP & Funds):</strong> ₹ ${remaining.toFixed(2)}</p>
+            <p><strong>SIP for Remaining (Year 1):</strong> ₹ ${remSIP.toFixed(2)}</p>
+            <p><strong>Lumpsum for Remaining Today:</strong> ₹ ${remLumpsum.toFixed(2)}</p>
+          `;
+        }
+      } else {
+        resultHTML += `<p><strong>No remaining amount—DP & current funds cover full future cost.</strong></p>`;
+      }
+
+      document.getElementById("car-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       6. Succession Planning
+       =========================== */
+    function calculateSuccession() {
+      const amountNeeded = parseFloat(document.getElementById("succession-amt").value) || 0;
+      const years = parseFloat(document.getElementById("succession-years").value) || 0;
+      const expReturn = parseFloat(document.getElementById("succession-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("succession-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("succession-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("succession-sip-inc").value) || 0;
+
+      // 1) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 2) Shortfall:
+      const shortfall = Math.max(0, amountNeeded - fvCurrentFunds);
+
+      // 3) SIP step-up:
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 4) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, years);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Amount Needed:</strong> ₹ ${amountNeeded.toFixed(2)}</p>
+        <p><strong>Shortfall After Current Funds:</strong> ₹ ${shortfall.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("succession-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       7. Wealth Creation
+       =========================== */
+    function calculateWealth() {
+      const amountNeeded = parseFloat(document.getElementById("wealth-amt").value) || 0;
+      const years = parseFloat(document.getElementById("wealth-years").value) || 0;
+      const expReturn = parseFloat(document.getElementById("wealth-return").value) || 0;
+      const currentFunds = parseFloat(document.getElementById("wealth-current-funds").value) || 0;
+      const fundsReturn = parseFloat(document.getElementById("wealth-funds-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("wealth-sip-inc").value) || 0;
+
+      // 1) FV of current funds:
+      const fvCurrentFunds = futureValue(currentFunds, fundsReturn, years);
+
+      // 2) Shortfall:
+      const shortfall = Math.max(0, amountNeeded - fvCurrentFunds);
+
+      // 3) SIP step-up:
+      const rMonthly = expReturn / 100 / 12;
+      let sumOfFVs = 0;
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = Math.pow(1 + sipInc/100, yr);
+        const monthsPayments = 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        const blockFV = stepped * ((Math.pow(1 + rMonthly, monthsPayments) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+        sumOfFVs += blockFV;
+      }
+      const baseSIP = sumOfFVs > 0 ? shortfall / sumOfFVs : 0;
+
+      // 4) Lumpsum needed today:
+      const lumpsum = presentValue(shortfall, expReturn, years);
+
+      // Display answers:
+      const resultHTML = `
+        <p><strong>Amount Needed:</strong> ₹ ${amountNeeded.toFixed(2)}</p>
+        <p><strong>Shortfall After Current Funds:</strong> ₹ ${shortfall.toFixed(2)}</p>
+        <p><strong>Base SIP (Year 1):</strong> ₹ ${baseSIP.toFixed(2)}</p>
+        <p><strong>Lumpsum Required Today:</strong> ₹ ${lumpsum.toFixed(2)}</p>
+      `;
+      document.getElementById("wealth-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       8. SIP Calculator
+       =========================== */
+    function calculateSIP() {
+      const monthly = parseFloat(document.getElementById("sip-monthly").value) || 0;
+      const years = parseFloat(document.getElementById("sip-period").value) || 0;
+      const expReturn = parseFloat(document.getElementById("sip-return").value) || 0;
+      const sipInc = parseFloat(document.getElementById("sip-sip-inc").value) || 0;
+
+      const rMonthly = expReturn / 100 / 12;
+      let futureValueTotal = 0;
+      let totalInvested = 0;
+
+      for (let yr = 0; yr < years; yr++) {
+        const stepped = monthly * Math.pow(1 + sipInc/100, yr);
+        totalInvested += stepped * 12;
+        const monthsRemaining = (years - yr - 1) * 12;
+        if (rMonthly > 0) {
+          const blockFV = stepped * ((Math.pow(1 + rMonthly, 12) - 1) / rMonthly) * Math.pow(1 + rMonthly, monthsRemaining);
+          futureValueTotal += blockFV;
+        } else {
+          futureValueTotal += stepped * (12 + monthsRemaining);
+        }
+      }
+
+      const resultHTML = `
+        <p><strong>Total Invested Amount:</strong> ₹ ${totalInvested.toFixed(2)}</p>
+        <p><strong>Future Value:</strong> ₹ ${futureValueTotal.toFixed(2)}</p>
+      `;
+      document.getElementById("sip-result").innerHTML = resultHTML;
+    }
+
+    /* ===========================
+       9. Quick Tools: FV & PV
+       =========================== */
+    function calculateFV() {
+      const pv = parseFloat(document.getElementById("fv-present").value) || 0;
+      const years = parseFloat(document.getElementById("fv-years").value) || 0;
+      const rate = parseFloat(document.getElementById("fv-rate").value) || 0;
+      const fv = futureValue(pv, rate, years);
+      document.getElementById("fv-result").innerHTML = `<p><strong>Future Value:</strong> ₹ ${fv.toFixed(2)}</p>`;
+    }
+    function calculatePV() {
+      const fv = parseFloat(document.getElementById("pv-future").value) || 0;
+      const years = parseFloat(document.getElementById("pv-years").value) || 0;
+      const rate = parseFloat(document.getElementById("pv-rate").value) || 0;
+      const pv = presentValue(fv, rate, years);
+      document.getElementById("pv-result").innerHTML = `<p><strong>Present Value:</strong> ₹ ${pv.toFixed(2)}</p>`;
+    }
+
+    /* ===========================
+       10. SWP Calculator
+       =========================== */
+    function calculateSWP() {
+      const invest = parseFloat(document.getElementById("swp-investment").value) || 0;
+      const useInflation = document.getElementById("swp-use-inflation").checked;
+      const inflation = useInflation ? parseFloat(document.getElementById("swp-inflation").value) || 0 : 0;
+      const expReturn = parseFloat(document.getElementById("swp-return").value) || 0;
+      const withdrawRate = parseFloat(document.getElementById("swp-withdrawal-rate").value) || 0;
+      const years = parseFloat(document.getElementById("swp-years").value) || 0;
+
+      let kitty = invest;
+      let withdrawal = (withdrawRate / 100) * kitty;
+      let tableHTML = `
+        <table style="width:100%; border-collapse: collapse; margin-top:16px;">
+          <tr>
+            <th style="border:1px solid #ccc; padding:8px; background:#0066cc; color:#fff;">Year</th>
+            <th style="border:1px solid #ccc; padding:8px; background:#0066cc; color:#fff;">Withdrawal</th>
+            <th style="border:1px solid #ccc; padding:8px; background:#0066cc; color:#fff;">Kitty Remaining</th>
+          </tr>`;
+      for (let y = 1; y <= years; y++) {
+        if (y === 1) {
+          withdrawal = (withdrawRate / 100) * kitty;
+        } else if (useInflation) {
+          withdrawal = withdrawal * (1 + inflation / 100);
+        }
+        let remaining = kitty - withdrawal;
+        let netReturn = expReturn;
+        if (useInflation) netReturn -= inflation;
+        if (netReturn < 0) netReturn = 0;
+        remaining = futureValue(remaining, netReturn, 1);
+
+        tableHTML += `
+          <tr>
+            <td style="border:1px solid #ccc; padding:8px;">${y}</td>
+            <td style="border:1px solid #ccc; padding:8px;">₹ ${withdrawal.toFixed(2)}</td>
+            <td style="border:1px solid #ccc; padding:8px;">₹ ${remaining.toFixed(2)}</td>
+          </tr>`;
+        kitty = remaining;
+      }
+      tableHTML += `</table>`;
+      document.getElementById("swp-result").innerHTML = `<p><strong>SWP Schedule:</strong></p>`;
+      document.getElementById("swp-table-container").innerHTML = tableHTML;
+    }
+
+    // Enable/disable inflation field for SWP
+    document.getElementById("swp-use-inflation").addEventListener("change", function() {
+      document.getElementById("swp-inflation").disabled = !this.checked;
+    });
+  </script>
+</body>
+</html>
+
+
